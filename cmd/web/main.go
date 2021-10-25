@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/urschmidt/bookings/pkg/config"
+	"github.com/urschmidt/bookings/internal/config"
 	"github.com/urschmidt/bookings/pkg/handlers"
 	"github.com/urschmidt/bookings/pkg/render"
 	"log"
