@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/justinas/nosurf"
 	"github.com/urschmidt/bookings/internal/config"
-	"github.com/urschmidt/bookings/pkg/models"
+	"github.com/urschmidt/bookings/internal/models"
 	"html/template"
 	"log"
 	"net/http"
