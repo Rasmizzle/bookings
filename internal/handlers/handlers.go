@@ -106,12 +106,16 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 
 // Reservation is a reservation tool page handler
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
 	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
-// PostReservation is a reservation tool page handler
+// PostReservation handles the post request for reservation tool page handler
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
@@ -128,7 +132,10 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 
 	form := forms.New(r.PostForm)
 
-	form.Has("first_name", r)
+	form.Required("first_name", "last_name", "email")
+	form.MinLength("first_name", 3, r)
+	form.IsEmail("email")
+
 	if !form.Valid() {
 		data := make(map[string]interface{})
 		data["reservation"] = reservation
